@@ -82,6 +82,7 @@ prev.addEventListener("click" , function(e){
 document.addEventListener("keydown" ,function(e){
     if(e.key === "Escape"){
         togglepop() ;
+        return ;
     } 
   
     ////////////////////////////
@@ -99,13 +100,10 @@ document.addEventListener("keydown" ,function(e){
             tarsrc = target.getAttribute("src") ;
          updatein() ,
          popimg.setAttribute("src",tarsrc) ;
-        }if(presskey===0 || presskey>images.length){
-            popbox.classList.add("apply-wrong") ;
-            setTimeout(()=>{
-                popbox.classList.remove("apply-wrong");} ,600)
         }
-    ////////////////////////
-    if(e.key === "ArrowRight")
+        
+        if(e.key.includes("Arrow")){
+                  if(e.key === "ArrowRight")
     {
     currindex = ++currindex % images.length ;
     let nextin = currindex ,
@@ -123,6 +121,18 @@ document.addEventListener("keydown" ,function(e){
     popimg.setAttribute("src",nextsrc) ;
     updatein();
     }
+    return ;
+        }
+        
+        
+        
+        if(presskey===0 || presskey>images.length || isNaN(e.key)){
+            popbox.classList.add("apply-wrong") ;
+            setTimeout(()=>{
+                popbox.classList.remove("apply-wrong");} ,600)
+        }
+    ////////////////////////
+ 
 
   
 }) ;
